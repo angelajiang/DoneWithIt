@@ -1,0 +1,65 @@
+import React from "react";
+import {
+  Alert,
+  Button,
+  Dimensions,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from "react-native";
+import {
+  useDimensions,
+  useDeviceOrientation,
+} from "@react-native-community/hooks";
+
+export default function App() {
+  console.log(useDimensions());
+  console.log(useDeviceOrientation());
+  const { landscape } = useDeviceOrientation();
+  const handlePress = () => console.log("text pressed");
+  return (
+    <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          backgroundColor: "dodgerblue",
+          width: "100%",
+          height: landscape ? "100%" : "30%",
+        }}
+      ></View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    // justifyContent: "center",
+    // alignItems: "center",
+  },
+});
+
+// <SafeAreaView style={styles.container}>
+//   <Button
+//     title="Click me"
+//     onPress={() =>
+//       Alert.prompt("My Title", "My message", (text) => console.log("hello"))
+//     }
+//   />
+// </SafeAreaView>
+
+// <Text numberOfLines={1} onPress={handlePress}>
+//   Hoyo hoyo hoyo! New text
+// </Text>
+// <TouchableHighlight onPress={() => console.log("Touched Image")}>
+//   <Image
+//     source={{
+//       width: 200,
+//       height: 300,
+//       uri: "https://picsum.photos/200/301",
+//     }}
+//   />
+// </TouchableHighlight>

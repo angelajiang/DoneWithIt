@@ -1,0 +1,26 @@
+import React from "react";
+import { View } from "react-native";
+
+export default function App() {
+  return (
+    <View
+      style={{
+        backgroundColor: "#fff",
+        flex: 1,
+        flexDirection: "row", // horizontal main if row
+        justifyContent: "center", // main
+        alignItems: "center", // secondary, alignment w/in each line
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: "dodgerblue",
+          height: 100,
+          width: 100,
+        }}
+      />
+      <View style={{ backgroundColor: "gold", height: 100, width: 100 }} />
+      <View style={{ backgroundColor: "tomato", height: 100, width: 100 }} />
+    </View>
+  );
+}
