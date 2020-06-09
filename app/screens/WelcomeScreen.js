@@ -1,58 +1,40 @@
-import React, { Component } from "react";
-import { ImageBackground, Image, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
 
-import AppButton from "../components/AppButton";
-import colors from "../config/colors";
+import Button from "../components/Button";
 
-class WelcomeScreen extends Component {
-  render() {
-    return (
-      <ImageBackground
-        source={imageBackground}
-        style={styles.background}
-        blurRadius={5}
-      >
-        <View style={styles.buttonContainer}>
-          <AppButton
-            color="primary"
-            title="Login"
-            onPress={() => console.log("Tapped")}
-          />
-          <AppButton
-            color="secondary"
-            title="Register"
-            onPress={() => console.log("Tapped")}
-          />
-        </View>
-        <View style={styles.logoContainer}>
-          <Image source={imageLogo} style={styles.logo} />
-          <Text style={styles.tagline}>Sell What You Don't Need</Text>
-        </View>
-      </ImageBackground>
-    );
-  }
+function WelcomeScreen({ navigation }) {
+  return (
+    <ImageBackground
+      blurRadius={10}
+      style={styles.background}
+      source={require("../assets/background.jpg")}
+    >
+      <View style={styles.logoContainer}>
+        <Image style={styles.logo} source={require("../assets/logo-red.png")} />
+        <Text style={styles.tagline}>Sell What You Don't Need</Text>
+      </View>
+      <View style={styles.buttonsContainer}>
+        <Button title="Login" onPress={() => navigation.navigate("Login")} />
+        <Button
+          title="Register"
+          onPress={() => navigation.navigate("Register")}
+          color="secondary"
+        />
+      </View>
+    </ImageBackground>
+  );
 }
-//<View style={styles.loginButton} />
-//<View style={styles.registerButton} />
 
-const imageBackground = require("../assets/background.jpg");
-const imageLogo = require("../assets/logo-red.png");
-
-// rnss
 const styles = StyleSheet.create({
   background: {
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
   },
-  buttonContainer: {
+  buttonsContainer: {
     padding: 20,
     width: "100%",
-  },
-  loginButton: {
-    width: "100%",
-    height: 70,
-    backgroundColor: colors.primary,
   },
   logo: {
     width: 100,
@@ -62,11 +44,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 70,
     alignItems: "center",
-  },
-  registerButton: {
-    width: "100%",
-    height: 70,
-    backgroundColor: colors.secondary,
   },
   tagline: {
     fontSize: 25,

@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from "react";
+import { StyleSheet, View, FlatList } from "react-native";
 
-import Icon from "../components/Icon";
-import ListItem from "../components/ListItem";
-import Screen from "../components/Screen";
+import { ListItem, ListItemSeparator } from "../components/lists";
 import colors from "../config/colors";
-import ListItemSeparator from "../components/ListItemSeparator";
+import Icon from "../components/Icon";
+import Screen from "../components/Screen";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 const menuItems = [
   {
@@ -15,6 +14,7 @@ const menuItems = [
       name: "format-list-bulleted",
       backgroundColor: colors.primary,
     },
+    targetScreen: "ListingsScreen",
   },
   {
     title: "My Messages",
@@ -22,24 +22,25 @@ const menuItems = [
       name: "email",
       backgroundColor: colors.secondary,
     },
+    targetScreen: "MessagesScreen",
   },
 ];
 
-export default function MyAccountScreen(props) {
-  const image = require("../assets/mosh.jpg");
+function AccountScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
           title="Mosh Hamedani"
           subTitle="programmingwithmosh@gmail.com"
-          image={image}
+          image={require("../assets/mosh.jpg")}
         />
       </View>
       <View style={styles.container}>
         <FlatList
           data={menuItems}
           keyExtractor={(menuItem) => menuItem.title}
+          ItemSeparatorComponent={ListItemSeparator}
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
@@ -49,9 +50,9 @@ export default function MyAccountScreen(props) {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
+              onPress={() => navigation.navigate(item.targetScreen)}
             />
           )}
-          ItemSeparatorComponent={ListItemSeparator}
         />
       </View>
       <ListItem
@@ -63,10 +64,12 @@ export default function MyAccountScreen(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 20,
-  },
   screen: {
     backgroundColor: colors.light,
   },
+  container: {
+    marginVertical: 20,
+  },
 });
+
+export default AccountScreen;

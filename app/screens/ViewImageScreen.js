@@ -1,38 +1,30 @@
-import React, { Component } from "react";
-import {
-  ImageBackground,
-  Image,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-
-import colors from "../config/colors";
+import React from "react";
+import { Image, StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-class ViewImageScreen extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.closeIcon}>
-          <MaterialCommunityIcons name="close" size={30} color={colors.white} />
-        </View>
-        <View style={styles.deleteIcon}>
-          <MaterialCommunityIcons
-            name="trash-can-outline"
-            size={35}
-            color={colors.white}
-          />
-        </View>
-        <Image source={img} style={styles.image}></Image>
-      </View>
-    );
-  }
-}
+import colors from "../config/colors";
 
-const img = require("../assets/chair.jpg");
+function ViewImageScreen(props) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.closeIcon}>
+        <MaterialCommunityIcons name="close" color="white" size={35} />
+      </View>
+      <View style={styles.deleteIcon}>
+        <MaterialCommunityIcons
+          name="trash-can-outline"
+          color="white"
+          size={35}
+        />
+      </View>
+      <Image
+        resizeMode="contain"
+        style={styles.image}
+        source={require("../assets/chair.jpg")}
+      />
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   closeIcon: {
@@ -52,7 +44,6 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
-    resizeMode: "contain",
   },
 });
 

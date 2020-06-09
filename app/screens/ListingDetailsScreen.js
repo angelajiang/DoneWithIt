@@ -1,55 +1,37 @@
-import React, { Component } from "react";
-import {
-  ImageBackground,
-  Image,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import React from "react";
+import { View, Image, StyleSheet } from "react-native";
 
 import colors from "../config/colors";
-import ListItem from "../components/ListItem";
-import AppText from "../components/AppText";
+import ListItem from "../components/lists/ListItem";
+import Text from "../components/Text";
 
-class ListingDetailsScreen extends Component {
-  render() {
-    const { title, subTitle, image } = this.props;
-    return (
-      <View>
-        <Image source={image} style={styles.image} />
-        <View style={styles.detailsContainer}>
-          <AppText style={styles.title}>Red jacket for sale</AppText>
-          <AppText style={styles.price}>$100</AppText>
-          <View style={styles.userContainer}>
-            <ListItem
-              image={require("../assets/mosh.jpg")}
-              title="Mosh Hamedani"
-              subTitle="5 Listings"
-            />
-          </View>
+function ListingDetailsScreen({ route }) {
+  const listing = route.params;
+  return (
+    <View>
+      <Image style={styles.image} source={listing.image} />
+      <View style={styles.detailsContainer}>
+        <Text style={styles.title}>{listing.title}</Text>
+        <Text style={styles.price}>${listing.price}</Text>
+        <View style={styles.userContainer}>
+          <ListItem
+            image={require("../assets/mosh.jpg")}
+            title="Mosh Hamedani"
+            subTitle="5 Listings"
+          />
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.white,
+  detailsContainer: {
+    padding: 20,
   },
   image: {
     width: "100%",
     height: 300,
-  },
-  detailsContainer: {
-    padding: 20,
-  },
-  title: {
-    color: colors.black,
-    fontSize: 24,
-    fontWeight: "500",
   },
   price: {
     color: colors.secondary,
@@ -57,21 +39,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 10,
   },
+  title: {
+    fontSize: 24,
+    fontWeight: "500",
+  },
   userContainer: {
     marginVertical: 40,
   },
 });
 
 export default ListingDetailsScreen;
-
-/*
-// Usage example
-
-  return (
-    <ListingDetailsScreen
-      title="Red jacket for sale!"
-      subTitle="$100"
-      image={require("./app/assets/jacket.jpg")}
-    />
-  );
-  */
